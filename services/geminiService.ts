@@ -1,9 +1,23 @@
 import { GoogleGenAI, Part } from "@google/genai";
 import { AspectRatio, GeneratedImage } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 const MODEL_NAME = 'gemini-2.5-flash-image';
+
+let ai: GoogleGenAI | null = null;
+
+const getAI = () => {
+  // Tenta obter a chave via process.env (injetado pelo Vite/Build)
+  const apiKey = process.env.API_KEY;
+
+  if (apiKey) {
+    if (!ai) {
+      ai = new GoogleGenAI({ apiKey: apiKey });
+    }
+    return ai;
+  }
+  
+  throw new Error("Chave de API não configurada.\n\nSe você está na Vercel, verifique se adicionou a variável 'API_KEY' nas configurações do projeto e se o arquivo 'vite.config.ts' está presente.");
+};
 
 interface GenerateResult {
   text: string;
@@ -23,6 +37,7 @@ export const generateContent = async (
 ): Promise<GenerateResult> => {
   
   try {
+    const client = getAI(); // Get instance lazily
     const parts: Part[] = [];
 
     // If we have a reference image, add it to the parts (Editing/Variation mode)
@@ -38,7 +53,7 @@ export const generateContent = async (
     // Add the text prompt
     parts.push({ text: prompt });
 
-    const response = await ai.models.generateContent({
+    const response = await client.models.generateContent({
       model: MODEL_NAME,
       contents: {
         parts: parts,

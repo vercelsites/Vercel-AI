@@ -88,11 +88,11 @@ export const InputArea: React.FC<InputAreaProps> = ({ onSend, isLoading }) => {
                   onChange={(e) => setAspectRatio(e.target.value as AspectRatio)}
                   className="bg-transparent text-xs text-zinc-300 focus:outline-none cursor-pointer appearance-none hover:text-white transition-colors z-10 pr-4"
                 >
-                  <option value={AspectRatio.Square} className="bg-zinc-900 text-zinc-100">Quadrado (1:1)</option>
-                  <option value={AspectRatio.Landscape} className="bg-zinc-900 text-zinc-100">Paisagem (16:9)</option>
-                  <option value={AspectRatio.Portrait} className="bg-zinc-900 text-zinc-100">Retrato (9:16)</option>
-                  <option value={AspectRatio.StandardLandscape} className="bg-zinc-900 text-zinc-100">Padrão (4:3)</option>
-                  <option value={AspectRatio.StandardPortrait} className="bg-zinc-900 text-zinc-100">Vertical (3:4)</option>
+                  <option value={AspectRatio.Square}>Quadrado (1:1)</option>
+                  <option value={AspectRatio.Landscape}>Paisagem (16:9)</option>
+                  <option value={AspectRatio.Portrait}>Retrato (9:16)</option>
+                  <option value={AspectRatio.StandardLandscape}>Padrão (4:3)</option>
+                  <option value={AspectRatio.StandardPortrait}>Vertical (3:4)</option>
                 </select>
                 {/* Custom Chevron */}
                 <div className="absolute right-2 pointer-events-none text-zinc-500 group-hover:text-zinc-300">
@@ -111,9 +111,9 @@ export const InputArea: React.FC<InputAreaProps> = ({ onSend, isLoading }) => {
                     onChange={(e) => setVariations(Number(e.target.value))}
                     className="bg-transparent text-xs text-zinc-300 focus:outline-none cursor-pointer appearance-none hover:text-white transition-colors z-10 pr-4"
                  >
-                   <option value={1} className="bg-zinc-900 text-zinc-100">1 variação</option>
-                   <option value={2} className="bg-zinc-900 text-zinc-100">2 variações</option>
-                   <option value={3} className="bg-zinc-900 text-zinc-100">3 variações</option>
+                   <option value={1}>1 variação</option>
+                   <option value={2}>2 variações</option>
+                   <option value={3}>3 variações</option>
                  </select>
                  {/* Custom Chevron */}
                  <div className="absolute right-2 pointer-events-none text-zinc-500 group-hover:text-zinc-300">

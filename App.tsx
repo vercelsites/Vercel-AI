@@ -95,13 +95,19 @@ export default function App() {
 
       setMessages(prev => [...prev, newAiMessage]);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       const errorMsgId = (Date.now() + 1).toString();
+      
+      let errorMessage = "Desculpe, encontrei um erro ao processar sua imagem. Por favor, tente novamente.";
+      if (error.message && (error.message.includes("API Key") || error.message.includes("API_KEY"))) {
+        errorMessage = "Erro de Configuração: Chave de API não encontrada. \n\nSe você está na Vercel, verifique as 'Environment Variables' e adicione 'API_KEY'.";
+      }
+
       setMessages(prev => [...prev, {
         id: errorMsgId,
         sender: Sender.AI,
-        text: "Desculpe, encontrei um erro ao processar sua imagem. Por favor, tente novamente.",
+        text: errorMessage,
         timestamp: Date.now(),
         isError: true
       }]);
